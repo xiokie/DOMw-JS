@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Manipulación de DOM :D</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<button>Agregar cajita</button>	
+	<div></div>
+	
+	<script type="text/javascript">
+		//Lo que esta aqui dentro es JS
+		var divElement = document.getElementsByTagName("div")[0];
+		divElement.innerText = "Poniendo texto con JS";
+		divElement.style.backgroundColor = "black";
+		divElement.style.color = "white";
+		divElement.style.height = "100%";
+		divElement.style.width = "100%";
+		
+		var btnAgregar = document.getElementsByTagName("button")[0];
+		/*btnAgregar.onclick = function(e){
+			console.log(e);
+			e.target.style.backgroundColor = " #fecc00 ";
+			divElement.style.color = "yellow";
+			divElement.style.fontSize = "30px";
+			divElement.style.fontFamily = "sans-serif";
+		}*/
+		//ASIGNANDO FUNCION, no llamar, si la llamas no charcha >:O
+		btnAgregar.onclick = crearCuadritos;
+
+		function crearCuadritos(){
+			//crear elemento
+			let localDivElement = document.createElement("div");
+			//configurar elemento (atributos de etiqueta)
+			localDivElement.style.width = "20%";
+			localDivElement.style.height = "100px";
+			localDivElement.style.backgroundColor = generarColor();
+			localDivElement.style.display = "inline-block";
+			//mandarlo al DOM
+			divElement.appendChild(localDivElement);
+		}
+
+		function generarColor(){
+			let red = 0;
+			let green = 0;
+			let blue = 0;
+			let rgbString = "";
+			red = Math.round(Math.random()*255);
+			green = Math.round(Math.random()*255);
+			blue = Math.round(Math.random()*255);
+			rgbString = "rgb("+ red +","+ green +","+ blue + ")";
+			return rgbString;
+		}
+	</script> 
+</body>
+</html>
