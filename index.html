@@ -3,9 +3,12 @@
 <head>
 	<title>Manipulación de DOM :D</title>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
 	<button>Agregar cajita</button>	
+	<button id="btnAgregarCirculito">Agregar circulito</button>	
+	<button id="btnEliminar">Eliminar</button>	
 	<div></div>
 	
 	<script type="text/javascript">
@@ -27,15 +30,32 @@
 		}*/
 		//ASIGNANDO FUNCION, no llamar, si la llamas no charcha >:O
 		btnAgregar.onclick = crearCuadritos;
+		//recuperar elementos boton
+		var btnAgregarCirculito = document.getElementById("btnAgregarCirculito");
+		btnAgregarCirculito.onclick = crearCirculitos;
 
+		var btnEliminar = document.getElementById("btnEliminar");
+		btnEliminar.onclick = eliminarFigura;
+		
 		function crearCuadritos(){
 			//crear elemento
 			let localDivElement = document.createElement("div");
 			//configurar elemento (atributos de etiqueta)
-			localDivElement.style.width = "20%";
+			localDivElement.style.width = "100px";
 			localDivElement.style.height = "100px";
-			localDivElement.style.backgroundColor = generarColor();
+			//localDivElement.style.backgroundColor = generarColor();
+			aplicarAnimacion(localDivElement);
 			localDivElement.style.display = "inline-block";
+			//mandarlo al DOM
+			divElement.appendChild(localDivElement);
+		}
+
+		function crearCirculitos(){
+			//creacion de elemento
+			let localDivElement = document.createElement("div");
+			//configuracion del elemento
+			localDivElement.classList.add("circulito");
+			aplicarAnimacion(localDivElement);
 			//mandarlo al DOM
 			divElement.appendChild(localDivElement);
 		}
@@ -50,6 +70,31 @@
 			blue = Math.round(Math.random()*255);
 			rgbString = "rgb("+ red +","+ green +","+ blue + ")";
 			return rgbString;
+		}
+		function aplicarAnimacion(element){
+			let animationFrom = {
+				backgroundColor: generarColor()	
+			};
+			let animationTo = {
+				backgroundColor: generarColor()
+			};
+			let animationConfig = {
+				duration: 2000,
+				iterations: Infinity
+			};
+			element.animate([animationFrom,animationTo],animationConfig);
+		}
+		function eliminarFigura(posicion){
+			//var figuraElement = divElement.children[0]
+			var figuraElement = divElement.lastChildElement;
+			try{
+				figuraElement.remove();
+			}catch(e){
+				console.log(e);
+			}finally{
+				console.log("Aiñ");
+			}
+			
 		}
 	</script> 
 </body>
