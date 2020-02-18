@@ -6,11 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-	<button>Agregar cajita</button>	
-	<button id="btnAgregarCirculito">Agregar circulito</button>	
-	<button id="btnEliminar">Eliminar</button>	
-	<div></div>
-	
+	<button id="btnAgregarCaja">Add Caja</button>	
+	<button id="btnAgregarCirculo">Add Circulo</button>
+	<button id="btnEliminar">Eliminar</button>
+	<div id="divCajas"></div>
 	<script type="text/javascript">
 		//Lo que esta aqui dentro es JS
 		var divElement = document.getElementsByTagName("div")[0];
@@ -31,8 +30,9 @@
 		//ASIGNANDO FUNCION, no llamar, si la llamas no charcha >:O
 		btnAgregar.onclick = crearCuadritos;
 		//recuperar elementos boton
-		var btnAgregarCirculito = document.getElementById("btnAgregarCirculito");
-		btnAgregarCirculito.onclick = crearCirculitos;
+		
+		var btnAgregarCirculo = document.getElementsByTagName("button")[1];
+		btnAgregarCirculo.onclick = crearCirculitos;
 
 		var btnEliminar = document.getElementById("btnEliminar");
 		btnEliminar.onclick = eliminarFigura;
@@ -43,7 +43,10 @@
 			//configurar elemento (atributos de etiqueta)
 			localDivElement.style.width = "100px";
 			localDivElement.style.height = "100px";
-			//localDivElement.style.backgroundColor = generarColor();
+			localDivElement.style.backgroundColor = generarColor();
+			//localDivElement.style.backgroundImage= 'url("img/6698475.png")';
+			localDivElement.style.backgroundSize = "cover";
+
 			aplicarAnimacion(localDivElement);
 			localDivElement.style.display = "inline-block";
 			//mandarlo al DOM
@@ -89,9 +92,10 @@
 			};
 			element.animate([animationFrom,animationTo],animationConfig);
 		}
-		function eliminarFigura(posicion){
-			//var figuraElement = divElement.children[0]
-			var figuraElement = divElement.lastChildElement;
+		function eliminarFigura(){
+			//var figuraElement = divElement.children[0];
+			var figuraElement = divElement.lastElementChild;
+			console.log();
 			try{
 				figuraElement.remove();
 			}catch(e){
